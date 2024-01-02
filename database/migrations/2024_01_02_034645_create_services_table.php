@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('type');
 
 
-            $table->string('image');
+            $table->string('image')->nullable();
 
             $table->string('name');
             $table->string('slug')->nullable();
             $table->text('description');
 
             $table->integer('price');
-            $table->integer('sold');
+            $table->integer('sold')->default(0);
 
             $table->string('status')->default('available');
 

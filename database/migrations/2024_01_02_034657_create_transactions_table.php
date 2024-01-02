@@ -22,12 +22,12 @@ return new class extends Migration
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
 
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->integer('total_price');
             $table->date('date_start');
             $table->date('date_end');
-            $table->text('status');
-            $table->text('payment_image');
+            $table->text('status')->default('Belum Bayar');
+            $table->text('payment_image')->nullable();
 
             $table->timestamps();
         });

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -15,4 +17,18 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/dashboard', [AdminController::class, 'dashboardIndex']);
+Route::get('/', [UserController::class, 'homepage']);
+
+Route::get('/login', [AuthController::class, 'loginIndex'])->name('loginIndex');
+Route::post('/loginProcess', [AuthController::class, 'loginProcess'])->name('loginProcess');
+
+Route::get('/register', [AuthController::class, 'registerIndex']);
+Route::post('/registerProcess', [AuthController::class, 'registerProcess'])->name('registerProcess');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
+
+    Route::middleware('onlyAdmin')->group(function() {
+        Route::get('/dashboard', [AdminController::class, 'dashboardIndex']);
+    });
+});
