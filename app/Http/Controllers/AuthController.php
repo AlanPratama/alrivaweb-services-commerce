@@ -28,7 +28,7 @@ class AuthController extends Controller
         $rememberMe = $request->has('remember_token');
 
         if (Auth::attempt($credensial, $rememberMe)) {
-            if (Auth::user()->role == 'admin') {
+            if (Auth::user()->role == 'Admin') {
                 return redirect('dashboard')->with('status', 'BERHASIL LOGIN!');
             } else {
                 return redirect('/')->with('status', 'BERHASIL LOGIN');
